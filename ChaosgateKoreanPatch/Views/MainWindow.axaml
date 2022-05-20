@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ChaosgateKoreanPatch.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+		Width="400" Height="450"
+        x:Class="ChaosgateKoreanPatch.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="카오스게이트 데몬헌터즈 한국어 패치">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<Grid Margin="5, 0">
+		<Grid.Styles>
+			<Style Selector="Grid > :is(Control).GridRow">
+				<Setter Property="Margin" Value="0, 5"/>
+			</Style>
+			<Style Selector="Grid > :is(Control).GridItem">
+				<Setter Property="Margin" Value="5, 0"/>
+			</Style>
+		</Grid.Styles>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="auto" />
+		</Grid.RowDefinitions>
+		<Grid Classes="GridRow" Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Grid.Column="0" Classes="GridItem" Text="게임 폴더" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<TextBox Grid.Column="1" Classes="GridItem" Text="{Binding GameDirectory}"/>
+			<Button Grid.Column="2" Classes="GridItem" Content="탐색" Click="onOpenFolderButtonClick" />
+		</Grid>
+		<TextBlock Grid.Row="1" Classes="GridRow" Text="{Binding Message}" Foreground="Red" TextWrapping="WrapWithOverflow"/>
+		<TextBox Grid.Row="2" Classes="GridRow" Text="{Binding Log}" ScrollViewer.VerticalScrollBarVisibility="Visible" IsReadOnly="True"/>
+		<Grid Grid.Row="3" Classes="GridRow">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="auto" />
+			</Grid.ColumnDefinitions>
+			<ProgressBar Grid.Column="0" Classes="GridItem" VerticalAlignment="Stretch" Minimum="0" Maximum="13" Value="{Binding Progress}"/>
+			<Button Grid.Column="1" Classes="GridItem" Content="패치" IsEnabled="{Binding PatchAvailable}" Command="{Binding Patch}"/>
+		</Grid>
+	</Grid>
+
+
+</Window>

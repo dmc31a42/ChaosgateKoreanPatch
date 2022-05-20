@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32427.441
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaosgateKoreanPatch", "ChaosgateKoreanPatch\ChaosgateKoreanPatch.csproj", "{409B7B16-4CEF-433D-93F6-B48BC2383465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaosgateKoreanPatch.Test", "ChaosgateKoreanPatch.Test\ChaosgateKoreanPatch.Test.csproj", "{BAD167CA-4C95-48D4-A659-47483B79E92C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{409B7B16-4CEF-433D-93F6-B48BC2383465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{409B7B16-4CEF-433D-93F6-B48BC2383465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{409B7B16-4CEF-433D-93F6-B48BC2383465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{409B7B16-4CEF-433D-93F6-B48BC2383465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD167CA-4C95-48D4-A659-47483B79E92C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD167CA-4C95-48D4-A659-47483B79E92C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD167CA-4C95-48D4-A659-47483B79E92C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD167CA-4C95-48D4-A659-47483B79E92C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8EAB48B-6061-4108-9B7F-5269DF7542DE}
+	EndGlobalSection
+EndGlobal
