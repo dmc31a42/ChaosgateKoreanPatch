@@ -46,7 +46,7 @@
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="auto" />
 			</Grid.ColumnDefinitions>
-			<ProgressBar Grid.Column="0" Classes="GridItem" VerticalAlignment="Stretch" Minimum="0" Maximum="13" Value="{Binding Progress}"/>
+			<ProgressBar Grid.Column="0" Classes="GridItem" VerticalAlignment="Stretch" Minimum="0" Maximum="12" Value="{Binding Progress}"/>
 			<Button Grid.Column="1" Classes="GridItem" Content="패치" Command="{Binding PatchCommand}"/>
 		</Grid>
 	</Grid>
