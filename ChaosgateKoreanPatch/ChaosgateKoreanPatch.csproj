@@ -18,6 +18,7 @@
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
     <None Remove="Assets\NanumBarunGothic.ttf" />
+    <None Remove="Assets\Thumbnail.png" />
   </ItemGroup>
   <ItemGroup>
     <!--This helps with theme dll-s trimming.

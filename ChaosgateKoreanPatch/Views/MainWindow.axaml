@@ -3,8 +3,8 @@
         xmlns:vm="using:ChaosgateKoreanPatch.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
-		Width="400" Height="450"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="550"
+		Width="400" Height="550"
         x:Class="ChaosgateKoreanPatch.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="카오스게이트 데몬헌터즈 한국어 패치"
@@ -26,10 +26,12 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
 			<RowDefinition Height="auto" />
+			<RowDefinition Height="auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
-		<Grid Classes="GridRow" Grid.Row="0">
+		<Image Grid.Row="0" Classes="GridRow" Source="avares://ChaosgateKoreanPatch/Assets/Thumbnail.png"/>
+		<Grid Classes="GridRow" Grid.Row="1">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="auto"/>
 				<ColumnDefinition Width="*"/>
@@ -39,9 +41,9 @@
 			<TextBox Grid.Column="1" Classes="GridItem" Text="{Binding GameDirectory}"/>
 			<Button Grid.Column="2" Classes="GridItem" Content="탐색" Click="onOpenFolderButtonClick" />
 		</Grid>
-		<TextBlock Grid.Row="1" Classes="GridRow" Text="{Binding Message}" Foreground="Red" TextWrapping="WrapWithOverflow"/>
-		<TextBox Grid.Row="2" Classes="GridRow" x:Name="LogTextBox" Text="{Binding Log}" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Visible"  IsReadOnly="True"/>
-		<Grid Grid.Row="3" Classes="GridRow">
+		<TextBlock Grid.Row="2" Classes="GridRow" Text="{Binding Message}" Foreground="Red" TextWrapping="WrapWithOverflow"/>
+		<TextBox Grid.Row="3" Classes="GridRow" x:Name="LogTextBox" Text="{Binding Log}" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Visible"  IsReadOnly="True"/>
+		<Grid Grid.Row="4" Classes="GridRow">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="auto" />
