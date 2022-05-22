@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -22,6 +22,7 @@ namespace ChaosgateKoreanPatch.ViewModels
         public MainWindowViewModel()
         {
             InitGameDirectory();
+            PatchCommand = ReactiveCommand.CreateFromTask(Patch, this.WhenAnyValue(x => x.PatchAvailable));
         }
 
         static private UnityFolder? tryGetGameFolder(string path)
@@ -88,12 +89,12 @@ namespace ChaosgateKoreanPatch.ViewModels
                 if (gameDirectory == "")
                 {
                     IsValid = false;
-                    Message = "Ä«¿À½º°ÔÀÌÆ® µ¥¸óÇåÅÍÁî°¡ ¼³Ä¡µÈ Æú´õ¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.";
+                    Message = "ì¹´ì˜¤ìŠ¤ê²Œì´íŠ¸ ë°ëª¬í—Œí„°ì¦ˆê°€ ì„¤ì¹˜ëœ í´ë”ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.";
                 } 
                 else if (unityFolder == null)
                 {
                     IsValid = false;
-                    Message = "¿Ã¹Ù¸¥ Ä«¿À½º°ÔÀÌÆ® µ¥¸óÇåÅÍÁî Æú´õ°¡ ¾Æ´Õ´Ï´Ù.";
+                    Message = "ì˜¬ë°”ë¥¸ ì¹´ì˜¤ìŠ¤ê²Œì´íŠ¸ ë°ëª¬í—Œí„°ì¦ˆ í´ë”ê°€ ì•„ë‹™ë‹ˆë‹¤.";
                 } 
                 else
                 {
@@ -150,7 +151,7 @@ namespace ChaosgateKoreanPatch.ViewModels
             }
             catch (IOException)
             {
-                Message = "°ÔÀÓ ¿¡¼ÂÀÌ ´Ù¸¥ ÇÁ·Î¼¼¼­¿¡ ÀÇÇØ Àá°ÜÀÖ½À´Ï´Ù. °ÔÀÓÀ» Á¾·áÇÏ°í ´Ù½Ã ÆĞÄ¡¸¦ ½ÃµµÇÏ¼¼¿ä.";
+                Message = "ê²Œì„ ì—ì…‹ì´ ë‹¤ë¥¸ í”„ë¡œì„¸ì„œì— ì˜í•´ ì ê²¨ìˆìŠµë‹ˆë‹¤. ê²Œì„ì„ ì¢…ë£Œí•˜ê³  ë‹¤ì‹œ íŒ¨ì¹˜ë¥¼ ì‹œë„í•˜ì„¸ìš”.";
                 return false;
             }
             Message = "";
@@ -164,7 +165,8 @@ namespace ChaosgateKoreanPatch.ViewModels
             internal set { this.RaiseAndSetIfChanged(ref isPatching, value); this.RaisePropertyChanged(nameof(PatchAvailable)); }
         }
 
-        public async void Patch()
+       
+        public async Task Patch()
         {
             if (!CheckFileAvailable()) return;
             IsPatching = true;
@@ -173,13 +175,13 @@ namespace ChaosgateKoreanPatch.ViewModels
             var tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             if (!Directory.Exists(tempDir)) Directory.CreateDirectory(tempDir);
 
-            Log += "ÀÓ½Ã Æú´õ »ı¼º.\n"; Progress++;
+            Log += "ì„ì‹œ í´ë” ìƒì„±.\n"; Progress++;
 
             await Task.Run(() =>
             {
                 WebClient myWebClient = new();
                 var translatedFile = Path.Combine(tempDir, "translated.zip");
-                Log += "¹ø¿ª µ¥ÀÌÅÍ ´Ù¿î·Îµå Áß...\n"; Progress++;
+                Log += "ë²ˆì—­ ë°ì´í„° ë‹¤ìš´ë¡œë“œ ì¤‘...\n"; Progress++;
                 bool downloadSuccess = false;
                 int failedCount = 0;
                 while (!downloadSuccess)
@@ -194,19 +196,19 @@ namespace ChaosgateKoreanPatch.ViewModels
                         if (File.Exists(translatedFile)) File.Delete(translatedFile);
                         if (failedCount > 3)
                         {
-                            Log += $"ÆĞÄ¡ ½ÇÆĞ.\n";
+                            Log += $"íŒ¨ì¹˜ ì‹¤íŒ¨.\n";
                             IsPatching = false;
                             return;
                         }
-                        Log += $"¹ø¿ª µ¥ÀÌÅÍ ´Ù¿î·Îµå ½ÇÆĞ({++failedCount}/3).\n";
+                        Log += $"ë²ˆì—­ ë°ì´í„° ë‹¤ìš´ë¡œë“œ ì‹¤íŒ¨({++failedCount}/3).\n";
                     }
                 }
-                
-                Log += "¹ø¿ª µ¥ÀÌÅÍ ´Ù¿î·Îµå ¿Ï·á.\n"; Progress++;
+
+                Log += "ë²ˆì—­ ë°ì´í„° ë‹¤ìš´ë¡œë“œ ì™„ë£Œ.\n"; Progress++;
                 var translatedFolder = Path.Combine(tempDir, "translated");
                 Directory.CreateDirectory(translatedFolder);
                 ZipFile.ExtractToDirectory(translatedFile, translatedFolder);
-                Log += "¹ø¿ª µ¥ÀÌÅÍ ¾ĞÃà ÇØÁ¦.\n"; Progress++;
+                Log += "ë²ˆì—­ ë°ì´í„° ì••ì¶• í•´ì œ.\n"; Progress++;
 
                 var jsonFolder = Path.Combine(translatedFolder, @"chaosgate\abilityloc_english\ko");
 
@@ -214,21 +216,21 @@ namespace ChaosgateKoreanPatch.ViewModels
                 var tcBundlePath = Path.Combine(unityFolder.UnityDataDir.StreamingAssetsFolderPath, @"bundles\localization\traditionalchinese");
                 var tcBundleCopyPath = Path.Combine(tempDir, Path.GetRandomFileName());
                 File.Copy(tcBundlePath, tcBundleCopyPath, true);
-                Log += "°ÔÀÓ ¿¡¼Â ÀÓ½Ã Æú´õ¿¡ º¹»ç.\n"; Progress++;
+                Log += "ê²Œì„ ì—ì…‹ ì„ì‹œ í´ë”ì— ë³µì‚¬.\n"; Progress++;
                 var am = new AssetsManager();
                 var tcBundle = am.LoadBundleFile(tcBundleCopyPath, true);
                 var tcInst = am.LoadAssetsFileFromBundle(tcBundle, 0);
                 var enBundle = am.LoadBundleFile(enBundlePath, true);
                 var enInst = am.LoadAssetsFileFromBundle(enBundle, 0);
-                Log += "°ÔÀÓ ¿¡¼Â ºÒ·¯¿À±â.\n"; Progress++;
+                Log += "ê²Œì„ ì—ì…‹ ë¶ˆëŸ¬ì˜¤ê¸°.\n"; Progress++;
 
                 var tcLocTablesInf = tcInst.table.assetFileInfo
-                  .Where(inf => !am.GetTypeInstance(tcInst, inf).GetBaseField().Get("localizationData").IsDummy());
+                    .Where(inf => !am.GetTypeInstance(tcInst, inf).GetBaseField().Get("localizationData").IsDummy());
                 var enLocTablesInf = enInst.table.assetFileInfo
-                  .Where(inf => !am.GetTypeInstance(enInst, inf).GetBaseField().Get("localizationData").IsDummy());
+                    .Where(inf => !am.GetTypeInstance(enInst, inf).GetBaseField().Get("localizationData").IsDummy());
                 var replacers = new List<AssetsReplacer>() { };
 
-                Log += "¹ø¿ª µ¥ÀÌÅÍ Àû¿ë Áß...\n"; Progress++;
+                Log += "ë²ˆì—­ ë°ì´í„° ì ìš© ì¤‘...\n"; Progress++;
                 foreach (var inf in tcLocTablesInf)
                 {
                     var baseField = am.GetTypeInstance(tcInst, inf).GetBaseField();
@@ -257,7 +259,7 @@ namespace ChaosgateKoreanPatch.ViewModels
                     var repl = new AssetsReplacerFromMemory(0, inf.index, (int)inf.curFileType, AssetHelper.GetScriptIndex(tcInst.file, inf), newGoBytes);
                     replacers.Add(repl);
                 }
-                Log += "¹ø¿ª µ¥ÀÌÅÍ Àû¿ë ¿Ï·á.\n"; Progress++;
+                Log += "ë²ˆì—­ ë°ì´í„° ì ìš© ì™„ë£Œ.\n"; Progress++;
                 //write changes to memory
                 byte[] newAssetData;
                 using (var stream = new MemoryStream())
@@ -269,25 +271,25 @@ namespace ChaosgateKoreanPatch.ViewModels
 
                 //rename this asset name from boring to cool when saving
                 var bunRepl = new BundleReplacerFromMemory(tcInst.name, tcInst.name, true, newAssetData, -1);
-                Log += "ÆĞÄ¡µÈ ¿¡¼Â »ı¼º.\n"; Progress++;
+                Log += "íŒ¨ì¹˜ëœ ì—ì…‹ ìƒì„±.\n"; Progress++;
                 if (File.Exists(tcBundlePath)) File.Delete(tcBundlePath);
                 using (var bunWriter = new AssetsFileWriter(File.OpenWrite(tcBundlePath)))
                     tcBundle.file.Write(bunWriter, new List<BundleReplacer>() { bunRepl });
-                Log += "ÆĞÄ¡µÈ ¿¡¼Â µğ½ºÅ©¿¡ ±â·Ï.\n"; Progress++;
+                Log += "íŒ¨ì¹˜ëœ ì—ì…‹ ë””ìŠ¤í¬ì— ê¸°ë¡.\n"; Progress++;
                 tcBundle.BundleStream.Dispose();
                 enBundle.BundleStream.Dispose();
-                Log += "ºÒ·¯¿Â ¿¡¼Â µ¥ÀÌÅÍ Á¤¸®Áß.\n"; Progress++;
+                Log += "ë¶ˆëŸ¬ì˜¨ ì—ì…‹ ë°ì´í„° ì •ë¦¬ì¤‘.\n"; Progress++;
                 Console.WriteLine("task end");
 
-                Log += "ÀÓ½ÃÆú´õ »èÁ¦.\n"; Progress++;
+                Log += "ì„ì‹œí´ë” ì‚­ì œ.\n"; Progress++;
                 Directory.Delete(tempDir, true);
-                Log += "ÆĞÄ¡ ¿Ï·á.\n"; Progress++;
+                Log += "íŒ¨ì¹˜ ì™„ë£Œ.\n"; Progress++;
                 IsPatching = false;
             });
-
         }
 
         public bool PatchAvailable => IsValid && !IsPatching;
 
+        public ReactiveCommand<Unit, Unit> PatchCommand { get; }
     }
 }

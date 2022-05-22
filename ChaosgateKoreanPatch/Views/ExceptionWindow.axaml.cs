@@ -1,8 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using System;
 using System.Collections;
+using System.ComponentModel;
 
 namespace ChaosgateKoreanPatch.Views
 {
@@ -17,8 +19,8 @@ namespace ChaosgateKoreanPatch.Views
 
         public ExceptionWindow(Exception e)
         {
-            InitializeComponent();
             exception = e;
+            InitializeComponent();
         }
 
         private void InitializeComponent()
@@ -49,6 +51,19 @@ namespace ChaosgateKoreanPatch.Views
                 myE = myE.InnerException;
             }
             this.FindControl<TextBox>("textBox1").Text = text;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                try
+                {
+                    desktop.TryShutdown(-1);
+                }
+                catch { }
+                
+            }
         }
     }
 }

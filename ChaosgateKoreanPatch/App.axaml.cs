@@ -21,6 +21,7 @@ namespace ChaosgateKoreanPatch
                 {
                     DataContext = new MainWindowViewModel(),
                 };
+
             }
 
             base.OnFrameworkInitializationCompleted();

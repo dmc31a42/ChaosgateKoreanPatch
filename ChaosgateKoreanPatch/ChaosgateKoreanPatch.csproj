@@ -8,9 +8,11 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <Optimize>True</Optimize>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
@@ -39,5 +41,11 @@
     <Compile Update="Views\ExceptionWindow.axaml.cs">
       <DependentUpon>ExceptionWindow.axaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\Documents\Development\ChaosgateKoreanPatch\ChaosgateKoreanPatch\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Documents\Development\ChaosgateKoreanPatch\ChaosgateKoreanPatch\.editorconfig" />
   </ItemGroup>
 </Project>
