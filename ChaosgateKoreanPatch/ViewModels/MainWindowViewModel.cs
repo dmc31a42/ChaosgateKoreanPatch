@@ -119,7 +119,17 @@ namespace ChaosgateKoreanPatch.ViewModels
             internal set => this.RaiseAndSetIfChanged(ref message, value);
         }
 
-        private string log = "";
+        private string log = @"* 패치를 할 때마다 온라인에서 번역 데이터를 받아옵니다.
+* 설치 후 언어에서 제일 마지막 언어를 선택하세요.
+* 게임 업데이트로 한국어가 해제됬으면 다시 패치를 적용하시면 됩니다.
+* 번역 데이터는 CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0)로 제공됩니다. (게임 제작사, 본인 번역분 예외)
+* 한국어 패치 문의: https://discord.gg/WgHw6pEWhE
+
+[MIT License]
+Avalonia, Newtonsoft.Json, Gameloop.Vdf, AssetsTools.NET
+
+
+";
         public string Log
         {
             get => log;

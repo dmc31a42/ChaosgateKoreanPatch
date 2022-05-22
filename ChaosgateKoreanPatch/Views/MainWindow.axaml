@@ -40,7 +40,7 @@
 			<Button Grid.Column="2" Classes="GridItem" Content="탐색" Click="onOpenFolderButtonClick" />
 		</Grid>
 		<TextBlock Grid.Row="1" Classes="GridRow" Text="{Binding Message}" Foreground="Red" TextWrapping="WrapWithOverflow"/>
-		<TextBox Grid.Row="2" Classes="GridRow" Text="{Binding Log}" ScrollViewer.VerticalScrollBarVisibility="Visible" IsReadOnly="True"/>
+		<TextBox Grid.Row="2" Classes="GridRow" x:Name="LogTextBox" Text="{Binding Log}" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Visible"  IsReadOnly="True"/>
 		<Grid Grid.Row="3" Classes="GridRow">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />

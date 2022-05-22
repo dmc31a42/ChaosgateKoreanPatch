@@ -1,6 +1,10 @@
+﻿using System;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using ChaosgateKoreanPatch.ViewModels;
+using ReactiveUI;
 
 namespace ChaosgateKoreanPatch.Views
 {
@@ -9,6 +13,14 @@ namespace ChaosgateKoreanPatch.Views
         public MainWindow()
         {
             InitializeComponent();
+            this.LogTextBox = this.FindControl<TextBox>("LogTextBox");
+
+            this.DataContextChanged += (object? sender, EventArgs e) =>
+            {
+                ((MainWindowViewModel)this.DataContext)?.WhenAnyValue(x => x.Log)
+                .Subscribe(x => Dispatcher.UIThread.Post(() => this.LogTextBox.CaretIndex = int.MaxValue));
+            };
+            
         }
 
         public async void onOpenFolderButtonClick(object sender, RoutedEventArgs e)
