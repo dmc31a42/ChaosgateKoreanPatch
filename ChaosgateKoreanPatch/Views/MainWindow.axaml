@@ -7,7 +7,8 @@
 		Width="400" Height="450"
         x:Class="ChaosgateKoreanPatch.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="카오스게이트 데몬헌터즈 한국어 패치">
+        Title="카오스게이트 데몬헌터즈 한국어 패치"
+		WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>

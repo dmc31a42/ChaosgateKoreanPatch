@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ChaosgateKoreanPatch.Views.ExceptionWindow"
-        Title="오류가 발생했습니다. 개발자에게 문의하세요">
+        Title="오류가 발생했습니다. 개발자에게 문의하세요"
+		WindowStartupLocation="CenterScreen">
   <TextBox Name="textBox1" ScrollViewer.VerticalScrollBarVisibility="Visible" />
 </Window>
