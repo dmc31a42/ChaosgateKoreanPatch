@@ -201,7 +201,6 @@ Avalonia, Newtonsoft.Json, Gameloop.Vdf, AssetsTools.NET
                 {
                     try
                     {
-                        throw new NotImplementedException();
                         myWebClient.DownloadFile("https://weblate.nakwonelec.com/download-language/ko/chaosgate/?format=zip", translatedFile);
                         downloadSuccess = true;
                         Log += "번역 데이터 다운로드 완료.\n"; Progress++;
