@@ -121,7 +121,7 @@ namespace ChaosgateKoreanPatch.ViewModels
         }
 
         private string log = @"* 패치를 할 때마다 온라인에서 번역 데이터를 받아옵니다.
-* 설치 후 언어에서 제일 마지막 언어를 선택하세요.
+* 설치 후 언어에서 제일 마지막 언어(중국어-번체)를 선택하세요.
 * 게임 업데이트로 한국어가 해제되면 다시 패치를 적용하세요.
 * 번역 데이터는 CC BY-NC-SA 4.0로 제공됩니다. 
   https://creativecommons.org/licenses/by-nc-sa/4.0
