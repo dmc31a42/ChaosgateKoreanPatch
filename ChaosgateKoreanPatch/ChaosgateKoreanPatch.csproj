@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
@@ -19,6 +19,7 @@
     <None Remove=".gitignore" />
     <None Remove="Assets\NanumBarunGothic.ttf" />
     <None Remove="Assets\Thumbnail.png" />
+    <None Remove="Resources\chaosgate-ko.zip" />
   </ItemGroup>
   <ItemGroup>
     <!--This helps with theme dll-s trimming.
@@ -45,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <EditorConfigFiles Remove="D:\Documents\Development\ChaosgateKoreanPatch\ChaosgateKoreanPatch\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\chaosgate-ko.zip" />
   </ItemGroup>
   <ItemGroup>
     <None Include="D:\Documents\Development\ChaosgateKoreanPatch\ChaosgateKoreanPatch\.editorconfig" />

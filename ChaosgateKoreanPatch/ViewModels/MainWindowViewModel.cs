@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -14,6 +14,7 @@ using ReactiveUI;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using AssetsTools.NET;
+using System.Reflection;
 
 namespace ChaosgateKoreanPatch.ViewModels
 {
@@ -200,23 +201,34 @@ Avalonia, Newtonsoft.Json, Gameloop.Vdf, AssetsTools.NET
                 {
                     try
                     {
+                        throw new NotImplementedException();
                         myWebClient.DownloadFile("https://weblate.nakwonelec.com/download-language/ko/chaosgate/?format=zip", translatedFile);
                         downloadSuccess = true;
+                        Log += "번역 데이터 다운로드 완료.\n"; Progress++;
                     }
                     catch
                     {
                         if (File.Exists(translatedFile)) File.Delete(translatedFile);
                         if (failedCount > 3)
                         {
-                            Log += $"패치 실패.\n";
-                            IsPatching = false;
-                            return;
+                            Log += $"번역 데이터 다운로드 실패. 내장된 번역 데이터를 사용합니다.\n";
+
+                            if (File.Exists(translatedFile)) File.Delete(translatedFile);
+
+                            using (FileStream stream = File.Create(translatedFile))
+                            {
+                                var _assembly = Assembly.GetExecutingAssembly();
+                                var _locStream = _assembly.GetManifestResourceStream("ChaosgateKoreanPatch.Resources.chaosgate-ko.zip");
+                                _locStream.CopyTo(stream);
+                                downloadSuccess = true;
+                                Log += "번역 데이터 추출 완료.\n"; Progress++;
+                                break;
+                            }
                         }
                         Log += $"번역 데이터 다운로드 실패({++failedCount}/3).\n";
                     }
                 }
 
-                Log += "번역 데이터 다운로드 완료.\n"; Progress++;
                 var translatedFolder = Path.Combine(tempDir, "translated");
                 Directory.CreateDirectory(translatedFolder);
                 ZipFile.ExtractToDirectory(translatedFile, translatedFolder);
